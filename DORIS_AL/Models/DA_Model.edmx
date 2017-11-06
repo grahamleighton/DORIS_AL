@@ -1,0 +1,425 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DDTrack_SandBoxModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="activateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="bigint" Mode="In" />
+          <Parameter Name="hash" Type="varchar" Mode="In" />
+          <Parameter Name="Success" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="addUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="hash" Type="varchar" Mode="In" />
+          <Parameter Name="UserName" Type="varchar" Mode="In" />
+          <Parameter Name="SupplierCode" Type="varchar" Mode="In" />
+          <Parameter Name="FullName" Type="varchar" Mode="In" />
+          <Parameter Name="Telephone" Type="varchar" Mode="In" />
+          <Parameter Name="AdminLevel" Type="int" Mode="In" />
+          <Parameter Name="RC" Type="int" Mode="InOut" />
+          <Parameter Name="ErrorMessage" Type="varchar(max)" Mode="InOut" />
+        </Function>
+        <Function Name="addUserSupplier" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="hash" Type="varchar" Mode="In" />
+          <Parameter Name="UserID" Type="bigint" Mode="In" />
+          <Parameter Name="SupplierID" Type="bigint" Mode="In" />
+          <Parameter Name="SupplierCode" Type="varchar" Mode="In" />
+          <Parameter Name="success" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="checkSecurityAnswer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="hash" Type="varchar" Mode="In" />
+          <Parameter Name="userid" Type="bigint" Mode="In" />
+          <Parameter Name="answer" Type="varchar" Mode="In" />
+          <Parameter Name="correct" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="deactivateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="bigint" Mode="In" />
+          <Parameter Name="hash" Type="varchar" Mode="In" />
+          <Parameter Name="Success" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="deleteUserSupplier" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="hash" Type="varchar" Mode="In" />
+          <Parameter Name="UserID" Type="bigint" Mode="In" />
+          <Parameter Name="SupplierID" Type="bigint" Mode="In" />
+          <Parameter Name="success" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="getMyUserDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="HashValue" Type="varchar" Mode="In" />
+          <Parameter Name="ValidUser" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="getRecoveryEmail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="bigint" Mode="In" />
+          <Parameter Name="body" Type="varchar(max)" Mode="InOut" />
+          <Parameter Name="subject" Type="varchar" Mode="InOut" />
+          <Parameter Name="emailaddress" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="getRecoveryUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="supplier" Type="varchar" Mode="In" />
+          <Parameter Name="userid" Type="bigint" Mode="InOut" />
+        </Function>
+        <Function Name="getSecurityQuestion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="bigint" Mode="In" />
+          <Parameter Name="question" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="getUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="hash" Type="varchar" Mode="In" />
+          <Parameter Name="UserID" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="getUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="hash" Type="varchar" Mode="In" />
+          <Parameter Name="Count" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="getUserSuppliers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="hash" Type="varchar" Mode="In" />
+          <Parameter Name="UserID" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="getWelcomeEmail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="bigint" Mode="In" />
+          <Parameter Name="body" Type="varchar(max)" Mode="InOut" />
+          <Parameter Name="subject" Type="varchar" Mode="InOut" />
+          <Parameter Name="emailaddress" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="isEmailAvailable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="hash" Type="varchar" Mode="In" />
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="exists" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="isSupplierAvailable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="hash" Type="varchar" Mode="In" />
+          <Parameter Name="suppliercode" Type="varchar" Mode="In" />
+          <Parameter Name="exists" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="loginUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userID" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+          <Parameter Name="Supplier" Type="varchar" Mode="In" />
+          <Parameter Name="token" Type="varchar" Mode="InOut" />
+          <Parameter Name="ipaddress" Type="varchar" Mode="In" />
+          <Parameter Name="change" Type="char" Mode="InOut" />
+        </Function>
+        <Function Name="setPassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="hash" Type="varchar" Mode="In" />
+          <Parameter Name="UserID" Type="bigint" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+          <Parameter Name="success" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="setPasswordandSecurityQuestion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="hash" Type="varchar" Mode="In" />
+          <Parameter Name="UserID" Type="bigint" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+          <Parameter Name="SecurityQuestionID" Type="bigint" Mode="In" />
+          <Parameter Name="SecurityAnswer" Type="varchar" Mode="In" />
+          <Parameter Name="success" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="updateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="hash" Type="varchar" Mode="In" />
+          <Parameter Name="UserID" Type="bigint" Mode="In" />
+          <Parameter Name="UserName" Type="varchar" Mode="In" />
+          <Parameter Name="FullName" Type="varchar" Mode="In" />
+          <Parameter Name="Telephone" Type="varchar" Mode="In" />
+          <Parameter Name="AdminLevel" Type="int" Mode="In" />
+          <Parameter Name="RC" Type="int" Mode="InOut" />
+          <Parameter Name="ErrorMessage" Type="varchar(max)" Mode="InOut" />
+        </Function>
+        <Function Name="validateRecovery" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="hash" Type="varchar" Mode="In" />
+          <Parameter Name="userid" Type="bigint" Mode="InOut" />
+          <Parameter Name="valid" Type="int" Mode="InOut" />
+          <Parameter Name="suppliercode" Type="varchar" Mode="InOut" />
+        </Function>
+        <EntityContainer Name="DDTrack_SandBoxModelStoreContainer" />
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DDTrack_SandBoxModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DDTrack_APIEntities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="activateUser">
+            <Parameter Name="UserID" Mode="In" Type="Int64" />
+            <Parameter Name="hash" Mode="In" Type="String" />
+            <Parameter Name="Success" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="addUser">
+            <Parameter Name="hash" Mode="In" Type="String" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="SupplierCode" Mode="In" Type="String" />
+            <Parameter Name="FullName" Mode="In" Type="String" />
+            <Parameter Name="Telephone" Mode="In" Type="String" />
+            <Parameter Name="AdminLevel" Mode="In" Type="Int32" />
+            <Parameter Name="RC" Mode="InOut" Type="Int32" />
+            <Parameter Name="ErrorMessage" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="addUserSupplier">
+            <Parameter Name="hash" Mode="In" Type="String" />
+            <Parameter Name="UserID" Mode="In" Type="Int64" />
+            <Parameter Name="SupplierID" Mode="In" Type="Int64" />
+            <Parameter Name="SupplierCode" Mode="In" Type="String" />
+            <Parameter Name="success" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="checkSecurityAnswer">
+            <Parameter Name="hash" Mode="In" Type="String" />
+            <Parameter Name="userid" Mode="In" Type="Int64" />
+            <Parameter Name="answer" Mode="In" Type="String" />
+            <Parameter Name="correct" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="deactivateUser">
+            <Parameter Name="UserID" Mode="In" Type="Int64" />
+            <Parameter Name="hash" Mode="In" Type="String" />
+            <Parameter Name="Success" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="deleteUserSupplier">
+            <Parameter Name="hash" Mode="In" Type="String" />
+            <Parameter Name="UserID" Mode="In" Type="Int64" />
+            <Parameter Name="SupplierID" Mode="In" Type="Int64" />
+            <Parameter Name="success" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getMyUserDetails" ReturnType="Collection(DDTrack_SandBoxModel.MyUserDetails)">
+            <Parameter Name="HashValue" Mode="In" Type="String" />
+            <Parameter Name="ValidUser" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getRecoveryEmail">
+            <Parameter Name="userid" Mode="In" Type="Int64" />
+            <Parameter Name="body" Mode="InOut" Type="String" />
+            <Parameter Name="subject" Mode="InOut" Type="String" />
+            <Parameter Name="emailaddress" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="getUser" ReturnType="Collection(DDTrack_SandBoxModel.User)">
+            <Parameter Name="hash" Mode="In" Type="String" />
+            <Parameter Name="UserID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="getUsers" ReturnType="Collection(DDTrack_SandBoxModel.Users)">
+            <Parameter Name="hash" Mode="In" Type="String" />
+            <Parameter Name="Count" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UserSuppliers" ReturnType="Collection(DDTrack_SandBoxModel.UserSuppliers)">
+            <Parameter Name="hash" Mode="In" Type="String" />
+            <Parameter Name="UserID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="getWelcomeEmail">
+            <Parameter Name="userid" Mode="In" Type="Int64" />
+            <Parameter Name="body" Mode="InOut" Type="String" />
+            <Parameter Name="subject" Mode="InOut" Type="String" />
+            <Parameter Name="emailaddress" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="isEmailAvailable">
+            <Parameter Name="hash" Mode="In" Type="String" />
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="exists" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="isSupplierAvailable">
+            <Parameter Name="hash" Mode="In" Type="String" />
+            <Parameter Name="suppliercode" Mode="In" Type="String" />
+            <Parameter Name="exists" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="loginUser">
+            <Parameter Name="userID" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="Supplier" Mode="In" Type="String" />
+            <Parameter Name="token" Mode="InOut" Type="String" />
+            <Parameter Name="ipaddress" Mode="In" Type="String" />
+            <Parameter Name="change" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="setPassword">
+            <Parameter Name="hash" Mode="In" Type="String" />
+            <Parameter Name="UserID" Mode="In" Type="Int64" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="success" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="setPasswordandSecurityQuestion">
+            <Parameter Name="hash" Mode="In" Type="String" />
+            <Parameter Name="UserID" Mode="In" Type="Int64" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="SecurityQuestionID" Mode="In" Type="Int64" />
+            <Parameter Name="SecurityAnswer" Mode="In" Type="String" />
+            <Parameter Name="success" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="updateUser">
+            <Parameter Name="hash" Mode="In" Type="String" />
+            <Parameter Name="UserID" Mode="In" Type="Int64" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="FullName" Mode="In" Type="String" />
+            <Parameter Name="Telephone" Mode="In" Type="String" />
+            <Parameter Name="AdminLevel" Mode="In" Type="Int32" />
+            <Parameter Name="RC" Mode="InOut" Type="Int32" />
+            <Parameter Name="ErrorMessage" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="validateRecovery">
+            <Parameter Name="hash" Mode="In" Type="String" />
+            <Parameter Name="userid" Mode="InOut" Type="Int64" />
+            <Parameter Name="valid" Mode="InOut" Type="Int32" />
+            <Parameter Name="suppliercode" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="getRecoveryUser">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="supplier" Mode="In" Type="String" />
+            <Parameter Name="userid" Mode="InOut" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="getSecurityQuestion">
+            <Parameter Name="userid" Mode="In" Type="Int64" />
+            <Parameter Name="question" Mode="InOut" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="MyUserDetails">
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="50" />
+          <Property Type="Int64" Name="UserID" Nullable="false" />
+          <Property Type="Int32" Name="AdminLevel" Nullable="true" />
+          <Property Type="String" Name="AdminLevelName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="SupplierCode" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="SupplierName" Nullable="false" MaxLength="3" />
+          <Property Type="Boolean" Name="Deactivated" Nullable="true" />
+          <Property Type="String" Name="Telephone" Nullable="true" MaxLength="15" />
+        </ComplexType>
+        <ComplexType Name="User">
+          <Property Type="Int64" Name="UserID" Nullable="true" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="250" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="AdminLevel" Nullable="true" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="lastlogintime" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Deactivated" Nullable="true" />
+          <Property Type="String" Name="Telephone" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="AdminLevelName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="SecurityQuestion" Nullable="true" MaxLength="600" />
+          <Property Type="Int64" Name="SecurityQuestionID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Users">
+          <Property Type="Int64" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="UID" Nullable="true" MaxLength="36" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="23" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="LastPasswordChange" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="AdminLevel" Nullable="true" />
+          <Property Type="Int32" Name="UnsuccessfulLogonCount" Nullable="true" />
+          <Property Type="Int64" Name="SecurityQuestionID" Nullable="true" />
+          <Property Type="String" Name="SecurityAnswer" Nullable="true" MaxLength="150" />
+          <Property Type="DateTime" Name="LastLoginTime" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="Deactivated" Nullable="true" />
+          <Property Type="String" Name="Telephone" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="AdminLevelName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="SupplierCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="SupplierName" Nullable="false" MaxLength="1" />
+        </ComplexType>
+        <ComplexType Name="UserSuppliers">
+          <Property Type="Int64" Name="UserID" Nullable="false" />
+          <Property Type="Int64" Name="SupplierID" Nullable="true" />
+          <Property Type="String" Name="SupplierCode" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="SupplierName" Nullable="false" MaxLength="150" />
+          <Property Type="Int64" Name="UserSupplierID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DDTrack_SandBoxModelStoreContainer" CdmEntityContainer="DDTrack_APIEntities" >
+          <FunctionImportMapping FunctionImportName="activateUser" FunctionName="DDTrack_SandBoxModel.Store.activateUser" />
+          <FunctionImportMapping FunctionImportName="addUser" FunctionName="DDTrack_SandBoxModel.Store.addUser" />
+          <FunctionImportMapping FunctionImportName="addUserSupplier" FunctionName="DDTrack_SandBoxModel.Store.addUserSupplier" />
+          <FunctionImportMapping FunctionImportName="checkSecurityAnswer" FunctionName="DDTrack_SandBoxModel.Store.checkSecurityAnswer" />
+          <FunctionImportMapping FunctionImportName="deactivateUser" FunctionName="DDTrack_SandBoxModel.Store.deactivateUser" />
+          <FunctionImportMapping FunctionImportName="deleteUserSupplier" FunctionName="DDTrack_SandBoxModel.Store.deleteUserSupplier" />
+          <FunctionImportMapping FunctionImportName="getMyUserDetails" FunctionName="DDTrack_SandBoxModel.Store.getMyUserDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DDTrack_SandBoxModel.MyUserDetails">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="AdminLevel" ColumnName="AdminLevel" />
+                <ScalarProperty Name="AdminLevelName" ColumnName="AdminLevelName" />
+                <ScalarProperty Name="SupplierCode" ColumnName="SupplierCode" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="Deactivated" ColumnName="Deactivated" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getRecoveryEmail" FunctionName="DDTrack_SandBoxModel.Store.getRecoveryEmail" />
+          <FunctionImportMapping FunctionImportName="getUser" FunctionName="DDTrack_SandBoxModel.Store.getUser">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DDTrack_SandBoxModel.User">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="AdminLevel" ColumnName="AdminLevel" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="lastlogintime" ColumnName="lastlogintime" />
+                <ScalarProperty Name="Deactivated" ColumnName="Deactivated" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="AdminLevelName" ColumnName="AdminLevelName" />
+                <ScalarProperty Name="SecurityQuestion" ColumnName="SecurityQuestion" />
+                <ScalarProperty Name="SecurityQuestionID" ColumnName="SecurityQuestionID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getUsers" FunctionName="DDTrack_SandBoxModel.Store.getUsers">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DDTrack_SandBoxModel.Users">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="LastPasswordChange" ColumnName="LastPasswordChange" />
+                <ScalarProperty Name="AdminLevel" ColumnName="AdminLevel" />
+                <ScalarProperty Name="UnsuccessfulLogonCount" ColumnName="UnsuccessfulLogonCount" />
+                <ScalarProperty Name="SecurityQuestionID" ColumnName="SecurityQuestionID" />
+                <ScalarProperty Name="SecurityAnswer" ColumnName="SecurityAnswer" />
+                <ScalarProperty Name="LastLoginTime" ColumnName="LastLoginTime" />
+                <ScalarProperty Name="Deactivated" ColumnName="Deactivated" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="AdminLevelName" ColumnName="AdminLevelName" />
+                <ScalarProperty Name="SupplierCode" ColumnName="SupplierCode" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UserSuppliers" FunctionName="DDTrack_SandBoxModel.Store.getUserSuppliers">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DDTrack_SandBoxModel.UserSuppliers">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="SupplierCode" ColumnName="SupplierCode" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="UserSupplierID" ColumnName="UserSupplierID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getWelcomeEmail" FunctionName="DDTrack_SandBoxModel.Store.getWelcomeEmail" />
+          <FunctionImportMapping FunctionImportName="isEmailAvailable" FunctionName="DDTrack_SandBoxModel.Store.isEmailAvailable" />
+          <FunctionImportMapping FunctionImportName="isSupplierAvailable" FunctionName="DDTrack_SandBoxModel.Store.isSupplierAvailable" />
+          <FunctionImportMapping FunctionImportName="loginUser" FunctionName="DDTrack_SandBoxModel.Store.loginUser" />
+          <FunctionImportMapping FunctionImportName="setPassword" FunctionName="DDTrack_SandBoxModel.Store.setPassword" />
+          <FunctionImportMapping FunctionImportName="setPasswordandSecurityQuestion" FunctionName="DDTrack_SandBoxModel.Store.setPasswordandSecurityQuestion" />
+          <FunctionImportMapping FunctionImportName="updateUser" FunctionName="DDTrack_SandBoxModel.Store.updateUser" />
+          <FunctionImportMapping FunctionImportName="validateRecovery" FunctionName="DDTrack_SandBoxModel.Store.validateRecovery" />
+          <FunctionImportMapping FunctionImportName="getRecoveryUser" FunctionName="DDTrack_SandBoxModel.Store.getRecoveryUser" />
+          <FunctionImportMapping FunctionImportName="getSecurityQuestion" FunctionName="DDTrack_SandBoxModel.Store.getSecurityQuestion" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
