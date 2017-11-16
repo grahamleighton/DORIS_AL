@@ -169,13 +169,17 @@ namespace DORIS_AL.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<User>("getUser", hashParameter, userIDParameter);
         }
     
-        public virtual ObjectResult<Users> getUsers(string hash, ObjectParameter count)
+        public virtual ObjectResult<Users> getUsers(string hash, ObjectParameter count, string search)
         {
             var hashParameter = hash != null ?
                 new ObjectParameter("hash", hash) :
                 new ObjectParameter("hash", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Users>("getUsers", hashParameter, count);
+            var searchParameter = search != null ?
+                new ObjectParameter("search", search) :
+                new ObjectParameter("search", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Users>("getUsers", hashParameter, count, searchParameter);
         }
     
         public virtual ObjectResult<UserSuppliers> UserSuppliers(string hash, Nullable<long> userID)
@@ -347,6 +351,15 @@ namespace DORIS_AL.Models
                 new ObjectParameter("userid", typeof(long));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("getSecurityQuestion", useridParameter, question);
+        }
+    
+        public virtual ObjectResult<SecurityQuestions> getSecurityQuestions(string hash)
+        {
+            var hashParameter = hash != null ?
+                new ObjectParameter("hash", hash) :
+                new ObjectParameter("hash", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SecurityQuestions>("getSecurityQuestions", hashParameter);
         }
     }
 }

@@ -63,6 +63,9 @@
           <Parameter Name="userid" Type="bigint" Mode="In" />
           <Parameter Name="question" Type="varchar" Mode="InOut" />
         </Function>
+        <Function Name="getSecurityQuestions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="hash" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="getUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="hash" Type="varchar" Mode="In" />
           <Parameter Name="UserID" Type="bigint" Mode="In" />
@@ -70,6 +73,7 @@
         <Function Name="getUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="hash" Type="varchar" Mode="In" />
           <Parameter Name="Count" Type="int" Mode="InOut" />
+          <Parameter Name="search" Type="varchar" Mode="In" />
         </Function>
         <Function Name="getUserSuppliers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="hash" Type="varchar" Mode="In" />
@@ -191,6 +195,7 @@
           <FunctionImport Name="getUsers" ReturnType="Collection(DDTrack_SandBoxModel.Users)">
             <Parameter Name="hash" Mode="In" Type="String" />
             <Parameter Name="Count" Mode="InOut" Type="Int32" />
+            <Parameter Name="search" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="UserSuppliers" ReturnType="Collection(DDTrack_SandBoxModel.UserSuppliers)">
             <Parameter Name="hash" Mode="In" Type="String" />
@@ -259,6 +264,9 @@
             <Parameter Name="userid" Mode="In" Type="Int64" />
             <Parameter Name="question" Mode="InOut" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="getSecurityQuestions" ReturnType="Collection(DDTrack_SandBoxModel.SecurityQuestions)" >
+          <Parameter Name="hash" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="MyUserDetails">
           <Property Type="String" Name="UserName" Nullable="false" MaxLength="250" />
@@ -309,6 +317,10 @@
           <Property Type="String" Name="SupplierCode" Nullable="false" MaxLength="4" />
           <Property Type="String" Name="SupplierName" Nullable="false" MaxLength="150" />
           <Property Type="Int64" Name="UserSupplierID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SecurityQuestions">
+          <Property Type="Int64" Name="SecurityQuestionID" Nullable="false" />
+          <Property Type="String" Name="SecurityQuestion" Nullable="false" MaxLength="600" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -399,6 +411,14 @@
           <FunctionImportMapping FunctionImportName="validateRecovery" FunctionName="DDTrack_SandBoxModel.Store.validateRecovery" />
           <FunctionImportMapping FunctionImportName="getRecoveryUser" FunctionName="DDTrack_SandBoxModel.Store.getRecoveryUser" />
           <FunctionImportMapping FunctionImportName="getSecurityQuestion" FunctionName="DDTrack_SandBoxModel.Store.getSecurityQuestion" />
+          <FunctionImportMapping FunctionImportName="getSecurityQuestions" FunctionName="DDTrack_SandBoxModel.Store.getSecurityQuestions">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DDTrack_SandBoxModel.SecurityQuestions">
+                <ScalarProperty Name="SecurityQuestionID" ColumnName="SecurityQuestionID" />
+                <ScalarProperty Name="SecurityQuestion" ColumnName="SecurityQuestion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

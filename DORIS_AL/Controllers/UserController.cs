@@ -89,10 +89,10 @@ namespace DORIS_AL.Controllers
 
         [ResponseType(typeof(Users))]
         [HttpGet]
-        public IHttpActionResult GetUsers(string hash)
+        public IHttpActionResult GetUsers(string hash,string search)
         {
             ObjectParameter count = new ObjectParameter("count", typeof(int));
-            List<Users> u = db.getUsers(hash, count).ToList();
+            List<Users> u = db.getUsers(hash, count,search).ToList();
             if (u == null || (int)count.Value == -1 )
             {
                 return UserNotAuthorized();
@@ -144,6 +144,8 @@ namespace DORIS_AL.Controllers
 
             return Ok(u);
         }
+
+      
 
         [ResponseType(typeof(AddUserResponse))]
         [HttpPost]

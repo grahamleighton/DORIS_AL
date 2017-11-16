@@ -105,10 +105,10 @@ namespace DORIS_AL.Controllers
 
             if ((int)exists.Value == 0)
             {
-                return Ok(true);
+                return Ok(false);
             }
 
-            return Ok(false);
+            return Ok(true);
         }
 
         [ResponseType(typeof(bool))]
@@ -125,6 +125,15 @@ namespace DORIS_AL.Controllers
             }
 
             return Ok(false);
+        }
+
+        [ResponseType(typeof(SecurityQuestions))]
+        [HttpGet]
+        public IHttpActionResult GetSecurityQuestions( string hash )
+        {
+            if (hash == null)
+                hash = "xxx";
+            return Ok(db.getSecurityQuestions(hash).ToList());
         }
 
         [ResponseType(typeof(RecoveryUserResponse))]
