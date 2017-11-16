@@ -14,13 +14,22 @@ namespace DORIS_AL.Controllers
     {
         private DDTrack_APIEntities db = new DDTrack_APIEntities();
 
-        [ResponseType(typeof(UserSuppliers))]
+        [ResponseType(typeof(UserSupplierList))]
         [HttpGet]
         public IHttpActionResult GetUserSuppliers(string hash , long UserID )
         {
             List<UserSuppliers> us = db.UserSuppliers(hash, UserID).ToList();
 
-            return Ok(us);
+            List<UserSupplierList> usl  = new List<UserSupplierList>();
+
+            foreach ( UserSuppliers u in us )
+            {
+                UserSupplierList ul = new UserSupplierList();
+                ul.Copy(u);
+                usl.Add(ul);
+
+            }
+            return Ok(usl);
         }
 
         [ResponseType(typeof(DeleteUserSupplierResponse))]
