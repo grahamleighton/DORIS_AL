@@ -169,11 +169,13 @@ namespace DORIS_AL.Models
         public string SupplierCode { get; set; }
         public string SupplierName { get; set; }
         public long SupplierID { get; set; }
+        public long UserSupplierID { get; set; }
         public void Copy(UserSuppliers us)
         {
             this.SupplierCode = us.SupplierCode;
             this.SupplierName = us.SupplierName;
             this.SupplierID = (long)us.SupplierID;
+            this.UserSupplierID = (long)us.UserSupplierID;
         }
     }
 }
