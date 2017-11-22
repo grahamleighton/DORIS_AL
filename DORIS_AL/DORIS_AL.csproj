@@ -188,6 +188,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DA_Model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\getAdminLevelsCreate_Result.cs">
+      <DependentUpon>DA_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\MyUserDetails.cs">
       <DependentUpon>DA_Model.tt</DependentUpon>
     </Compile>

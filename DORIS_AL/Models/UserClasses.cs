@@ -164,6 +164,10 @@ namespace DORIS_AL.Models
     {
         public int ReturnCode { get; set;  }
     }
+    public class PostUserSupplierResponse : ErrorMessages
+    {
+        public int ReturnCode { get; set; }
+    }
     public class UserSupplierList
     {
         public string SupplierCode { get; set; }
@@ -176,6 +180,16 @@ namespace DORIS_AL.Models
             this.SupplierName = us.SupplierName;
             this.SupplierID = (long)us.SupplierID;
             this.UserSupplierID = (long)us.UserSupplierID;
+        }
+    }
+    public class AdminLevels
+    {
+        public int AdminNumber { get; set; }
+        public string AdminName { get; set;  }
+        public void Copy(getAdminLevelsCreate_Result par)
+        {
+            this.AdminName = par.AdminLevelName;
+            this.AdminNumber = (int)par.AdminLevelNumber;
         }
     }
 }

@@ -361,5 +361,18 @@ namespace DORIS_AL.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SecurityQuestions>("getSecurityQuestions", hashParameter);
         }
+    
+        public virtual ObjectResult<getAdminLevelsCreate_Result> getAdminLevelsCreate(string hash, Nullable<long> userID)
+        {
+            var hashParameter = hash != null ?
+                new ObjectParameter("hash", hash) :
+                new ObjectParameter("hash", typeof(string));
+    
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getAdminLevelsCreate_Result>("getAdminLevelsCreate", hashParameter, userIDParameter);
+        }
     }
 }

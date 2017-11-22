@@ -44,6 +44,10 @@
           <Parameter Name="SupplierID" Type="bigint" Mode="In" />
           <Parameter Name="success" Type="int" Mode="InOut" />
         </Function>
+        <Function Name="getAdminLevelsCreate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="hash" Type="varchar" Mode="In" />
+          <Parameter Name="UserID" Type="bigint" Mode="In" />
+        </Function>
         <Function Name="getMyUserDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="HashValue" Type="varchar" Mode="In" />
           <Parameter Name="ValidUser" Type="int" Mode="InOut" />
@@ -267,6 +271,10 @@
           <FunctionImport Name="getSecurityQuestions" ReturnType="Collection(DDTrack_SandBoxModel.SecurityQuestions)" >
           <Parameter Name="hash" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="getAdminLevelsCreate" ReturnType="Collection(DDTrack_SandBoxModel.getAdminLevelsCreate_Result)">
+          <Parameter Name="hash" Mode="In" Type="String" />
+            <Parameter Name="UserID" Mode="In" Type="Int64" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="MyUserDetails">
           <Property Type="String" Name="UserName" Nullable="false" MaxLength="250" />
@@ -321,6 +329,10 @@
         <ComplexType Name="SecurityQuestions">
           <Property Type="Int64" Name="SecurityQuestionID" Nullable="false" />
           <Property Type="String" Name="SecurityQuestion" Nullable="false" MaxLength="600" />
+        </ComplexType>
+        <ComplexType Name="getAdminLevelsCreate_Result">
+          <Property Type="Int32" Name="AdminLevelNumber" Nullable="true" />
+          <Property Type="String" Name="AdminLevelName" Nullable="true" MaxLength="150" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -416,6 +428,14 @@
               <ComplexTypeMapping TypeName="DDTrack_SandBoxModel.SecurityQuestions">
                 <ScalarProperty Name="SecurityQuestionID" ColumnName="SecurityQuestionID" />
                 <ScalarProperty Name="SecurityQuestion" ColumnName="SecurityQuestion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getAdminLevelsCreate" FunctionName="DDTrack_SandBoxModel.Store.getAdminLevelsCreate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DDTrack_SandBoxModel.getAdminLevelsCreate_Result">
+                <ScalarProperty Name="AdminLevelNumber" ColumnName="AdminLevelNumber" />
+                <ScalarProperty Name="AdminLevelName" ColumnName="AdminLevelName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

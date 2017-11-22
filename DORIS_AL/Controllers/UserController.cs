@@ -101,6 +101,23 @@ namespace DORIS_AL.Controllers
             return Ok(u);
         }
 
+        [ResponseType(typeof(AdminLevels))]
+        [HttpGet]
+        public IHttpActionResult GetCreateAdminLevels(string hash,long UserID)
+        {
+            List<AdminLevels> al = new List<AdminLevels>();
+            List<getAdminLevelsCreate_Result> u = db.getAdminLevelsCreate(hash,UserID).ToList();
+
+            foreach ( getAdminLevelsCreate_Result p in u )
+            {
+                AdminLevels a = new AdminLevels();
+                a.Copy(p);
+                al.Add(a);
+            }
+
+            return Ok(al);
+        }
+
         [ResponseType(typeof(string))]
         private IHttpActionResult UserNotAuthorized()
         {
