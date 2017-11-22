@@ -114,6 +114,7 @@ namespace DORIS_AL.Models
     }
     public class AddUser : UpdateUser
     {
+        [MaxLength(4)]
         public string SupplierCode { get; set; }
     }
 
