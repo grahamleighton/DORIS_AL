@@ -374,5 +374,10 @@ namespace DORIS_AL.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getAdminLevelsCreate_Result>("getAdminLevelsCreate", hashParameter, userIDParameter);
         }
+    
+        public virtual int ClearTestData()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ClearTestData");
+        }
     }
 }

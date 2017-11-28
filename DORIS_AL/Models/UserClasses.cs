@@ -10,25 +10,47 @@ namespace DORIS_AL.Models
     {
         [Required]
         public string Hash { get; set; }
+        public string _display()
+        {
+            return ( "\" Hash : \"" + Hash + "\"" );
+        }
     }
     public class UserAccess : BaseAccess
     { 
         public long UserID { get; set; }
+        public new string _display()
+        {
+            return base._display() + ", UserID : \"" + Convert.ToString(UserID) + "\"";
+        }
     }
     public class UserClasses : UserAccess
     {
-        public string Password { get; set; } 
+        public string Password { get; set; }
+        public new string _display()
+        {
+            return base._display() + ", Password : \"" + Password + "\"";
+        }
     }
 
     public class CheckSecurity : UserAccess
     {
         public string Answer { get; set; }
+        public new string _display()
+        {
+            return base._display() + ", Answer : \"" + Answer + "\"";
+        }
+
     }
 
     public class SetPasswordAndSecurity : UserClasses
     {
         public long SecurityQuestionID { get; set; }
         public string SecurityAnswer { get; set; }
+        public new string _display()
+        {
+            return base._display() + ", SecurityQuestionID : \"" + Convert.ToString(SecurityQuestionID) + "\" , SecurityAnswer : \"" + SecurityAnswer + "\"";
+        }
+
 
     }
 
@@ -36,11 +58,20 @@ namespace DORIS_AL.Models
     {
         public string UserName { get; set;  }
         public string SupplierCode { get; set; }
+        public new string _display()
+        {
+            return base._display() + ", UserName: \"" + UserName + "\" , SupplierCode : \"" + SupplierCode + "\"";
+        }
+
     }
     public class RecoveryUserResponse 
     {
         public long UserID { get; set;  }
-      
+        public string _display()
+        {
+            return "UserID : \"" + Convert.ToString(UserID) + "\"";
+        }
+
     }
     public class RecoveryEmailResponse 
     {
@@ -59,6 +90,10 @@ namespace DORIS_AL.Models
         [RegularExpression(@"^[^\s\,]*$")]
         public string Supplier { get; set; }
         public string IPAddress { get; set; }
+        public string _display ()
+        {
+            return " UserID : \"" + UserID + "\", Password : \"" + Password + "\", Supplier : \"" + Supplier + "\", IPAddress : \"" + IPAddress + "\" ";
+        }
     }
 
     public class LoginResponse : LoginRequest
@@ -72,6 +107,11 @@ namespace DORIS_AL.Models
             this.Supplier = r.Supplier;
             this.IPAddress = r.IPAddress;
             
+        }
+        public new string _display()
+        {
+            return base._display() + ", Token : \"" + Token + "\", Change : \"" + Change + "\"";
+
         }
     }
     public class ErrorMessages
@@ -89,7 +129,18 @@ namespace DORIS_AL.Models
         {
             return ErrorMessage;
         }
-
+        public string _display()
+        {
+            string disp = "";
+            foreach ( string msg in ErrorMessage)
+            {
+                if ( String.IsNullOrEmpty(disp) )
+                    disp = "ErrorMessage : \"" + msg + "\"";
+                else
+                    disp = disp + ", ErrorMessage : \"" + msg + "\"";
+            }
+            return disp;
+        }
     }
 
     public class InvalidUser : ErrorMessages
@@ -111,16 +162,30 @@ namespace DORIS_AL.Models
         public string FullName { get; set; }
         public string Telephone { get; set; }
         public int AdminLevel { get; set; }
+        public new string _display()
+        {
+            return base._display() + ",UserName : \"" + UserName + "\" , FullName : \"" + FullName + "\", Telephone : \"" + Telephone + "\", AdminLevel : \"" + Convert.ToString(AdminLevel) + "\"" ;
+        }
+
     }
     public class AddUser : UpdateUser
     {
         [MaxLength(4)]
         public string SupplierCode { get; set; }
+        public new string _display()
+        {
+            return base._display() + ",SupplierCode : \"" + SupplierCode + "\""; 
+        }
+
     }
 
     public class AddUserResponse : ErrorMessages
     {
         public int ReturnCode { get; set; }
+        public new string _display()
+        {
+            return " Return Code : \"" + Convert.ToString(ReturnCode) + "\" , " + base._display() ;
+        }
     }
 
     public class ValidateRecoveryResponse

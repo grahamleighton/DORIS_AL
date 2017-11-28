@@ -33,6 +33,7 @@
           <Parameter Name="answer" Type="varchar" Mode="In" />
           <Parameter Name="correct" Type="int" Mode="InOut" />
         </Function>
+        <Function Name="ClearTestData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="deactivateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="bigint" Mode="In" />
           <Parameter Name="hash" Type="varchar" Mode="In" />
@@ -272,9 +273,10 @@
           <Parameter Name="hash" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="getAdminLevelsCreate" ReturnType="Collection(DDTrack_SandBoxModel.getAdminLevelsCreate_Result)">
-          <Parameter Name="hash" Mode="In" Type="String" />
+            <Parameter Name="hash" Mode="In" Type="String" />
             <Parameter Name="UserID" Mode="In" Type="Int64" />
           </FunctionImport>
+          <FunctionImport Name="ClearTestData" />
         </EntityContainer>
         <ComplexType Name="MyUserDetails">
           <Property Type="String" Name="UserName" Nullable="false" MaxLength="250" />
@@ -439,6 +441,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ClearTestData" FunctionName="DDTrack_SandBoxModel.Store.ClearTestData" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
