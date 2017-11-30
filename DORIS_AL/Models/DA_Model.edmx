@@ -34,6 +34,11 @@
           <Parameter Name="correct" Type="int" Mode="InOut" />
         </Function>
         <Function Name="ClearTestData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="cloneUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="hash" Type="varchar" Mode="In" />
+          <Parameter Name="UserID" Type="bigint" Mode="In" />
+          <Parameter Name="impersonate" Type="varchar" Mode="InOut" />
+        </Function>
         <Function Name="deactivateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="bigint" Mode="In" />
           <Parameter Name="hash" Type="varchar" Mode="In" />
@@ -132,12 +137,6 @@
           <Parameter Name="RC" Type="int" Mode="InOut" />
           <Parameter Name="ErrorMessage" Type="varchar(max)" Mode="InOut" />
         </Function>
-        <Function Name="validateRecovery" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="hash" Type="varchar" Mode="In" />
-          <Parameter Name="userid" Type="bigint" Mode="InOut" />
-          <Parameter Name="valid" Type="int" Mode="InOut" />
-          <Parameter Name="suppliercode" Type="varchar" Mode="InOut" />
-        </Function>
         <EntityContainer Name="DDTrack_SandBoxModelStoreContainer" />
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -182,10 +181,6 @@
             <Parameter Name="UserID" Mode="In" Type="Int64" />
             <Parameter Name="SupplierID" Mode="In" Type="Int64" />
             <Parameter Name="success" Mode="InOut" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="getMyUserDetails" ReturnType="Collection(DDTrack_SandBoxModel.MyUserDetails)">
-            <Parameter Name="HashValue" Mode="In" Type="String" />
-            <Parameter Name="ValidUser" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="getRecoveryEmail">
             <Parameter Name="userid" Mode="In" Type="Int64" />
@@ -277,18 +272,16 @@
             <Parameter Name="UserID" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="ClearTestData" />
+          <FunctionImport Name="getMyUserDetails" ReturnType="Collection(DDTrack_SandBoxModel.MyUserDetails)">
+            <Parameter Name="HashValue" Mode="In" Type="String" />
+            <Parameter Name="ValidUser" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="cloneUser">
+            <Parameter Name="hash" Mode="In" Type="String" />
+            <Parameter Name="UserID" Mode="In" Type="Int64" />
+            <Parameter Name="impersonate" Mode="InOut" Type="String" />
+          </FunctionImport>
         </EntityContainer>
-        <ComplexType Name="MyUserDetails">
-          <Property Type="String" Name="UserName" Nullable="false" MaxLength="250" />
-          <Property Type="String" Name="FullName" Nullable="true" MaxLength="50" />
-          <Property Type="Int64" Name="UserID" Nullable="false" />
-          <Property Type="Int32" Name="AdminLevel" Nullable="true" />
-          <Property Type="String" Name="AdminLevelName" Nullable="true" MaxLength="150" />
-          <Property Type="String" Name="SupplierCode" Nullable="false" MaxLength="4" />
-          <Property Type="String" Name="SupplierName" Nullable="false" MaxLength="3" />
-          <Property Type="Boolean" Name="Deactivated" Nullable="true" />
-          <Property Type="String" Name="Telephone" Nullable="true" MaxLength="15" />
-        </ComplexType>
         <ComplexType Name="User">
           <Property Type="Int64" Name="UserID" Nullable="true" />
           <Property Type="String" Name="UserName" Nullable="false" MaxLength="250" />
@@ -336,6 +329,18 @@
           <Property Type="Int32" Name="AdminLevelNumber" Nullable="true" />
           <Property Type="String" Name="AdminLevelName" Nullable="true" MaxLength="150" />
         </ComplexType>
+        <ComplexType Name="MyUserDetails">
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="50" />
+          <Property Type="Int64" Name="UserID" Nullable="false" />
+          <Property Type="Int32" Name="AdminLevel" Nullable="true" />
+          <Property Type="String" Name="AdminLevelName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="SupplierCode" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="SupplierName" Nullable="false" MaxLength="3" />
+          <Property Type="Boolean" Name="Deactivated" Nullable="true" />
+          <Property Type="String" Name="Telephone" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="MVCRole" Nullable="true" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -348,21 +353,6 @@
           <FunctionImportMapping FunctionImportName="checkSecurityAnswer" FunctionName="DDTrack_SandBoxModel.Store.checkSecurityAnswer" />
           <FunctionImportMapping FunctionImportName="deactivateUser" FunctionName="DDTrack_SandBoxModel.Store.deactivateUser" />
           <FunctionImportMapping FunctionImportName="deleteUserSupplier" FunctionName="DDTrack_SandBoxModel.Store.deleteUserSupplier" />
-          <FunctionImportMapping FunctionImportName="getMyUserDetails" FunctionName="DDTrack_SandBoxModel.Store.getMyUserDetails">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DDTrack_SandBoxModel.MyUserDetails">
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="FullName" ColumnName="FullName" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="AdminLevel" ColumnName="AdminLevel" />
-                <ScalarProperty Name="AdminLevelName" ColumnName="AdminLevelName" />
-                <ScalarProperty Name="SupplierCode" ColumnName="SupplierCode" />
-                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
-                <ScalarProperty Name="Deactivated" ColumnName="Deactivated" />
-                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="getRecoveryEmail" FunctionName="DDTrack_SandBoxModel.Store.getRecoveryEmail" />
           <FunctionImportMapping FunctionImportName="getUser" FunctionName="DDTrack_SandBoxModel.Store.getUser">
             <ResultMapping>
@@ -422,7 +412,6 @@
           <FunctionImportMapping FunctionImportName="setPassword" FunctionName="DDTrack_SandBoxModel.Store.setPassword" />
           <FunctionImportMapping FunctionImportName="setPasswordandSecurityQuestion" FunctionName="DDTrack_SandBoxModel.Store.setPasswordandSecurityQuestion" />
           <FunctionImportMapping FunctionImportName="updateUser" FunctionName="DDTrack_SandBoxModel.Store.updateUser" />
-          <FunctionImportMapping FunctionImportName="validateRecovery" FunctionName="DDTrack_SandBoxModel.Store.validateRecovery" />
           <FunctionImportMapping FunctionImportName="getRecoveryUser" FunctionName="DDTrack_SandBoxModel.Store.getRecoveryUser" />
           <FunctionImportMapping FunctionImportName="getSecurityQuestion" FunctionName="DDTrack_SandBoxModel.Store.getSecurityQuestion" />
           <FunctionImportMapping FunctionImportName="getSecurityQuestions" FunctionName="DDTrack_SandBoxModel.Store.getSecurityQuestions">
@@ -442,6 +431,23 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ClearTestData" FunctionName="DDTrack_SandBoxModel.Store.ClearTestData" />
+          <FunctionImportMapping FunctionImportName="getMyUserDetails" FunctionName="DDTrack_SandBoxModel.Store.getMyUserDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DDTrack_SandBoxModel.MyUserDetails">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="AdminLevel" ColumnName="AdminLevel" />
+                <ScalarProperty Name="AdminLevelName" ColumnName="AdminLevelName" />
+                <ScalarProperty Name="SupplierCode" ColumnName="SupplierCode" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="Deactivated" ColumnName="Deactivated" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="MVCRole" ColumnName="MVCRole" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="cloneUser" FunctionName="DDTrack_SandBoxModel.Store.cloneUser" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

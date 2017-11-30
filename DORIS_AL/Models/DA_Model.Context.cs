@@ -138,15 +138,6 @@ namespace DORIS_AL.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("deleteUserSupplier", hashParameter, userIDParameter, supplierIDParameter, success);
         }
     
-        public virtual ObjectResult<MyUserDetails> getMyUserDetails(string hashValue, ObjectParameter validUser)
-        {
-            var hashValueParameter = hashValue != null ?
-                new ObjectParameter("HashValue", hashValue) :
-                new ObjectParameter("HashValue", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MyUserDetails>("getMyUserDetails", hashValueParameter, validUser);
-        }
-    
         public virtual int getRecoveryEmail(Nullable<long> userid, ObjectParameter body, ObjectParameter subject, ObjectParameter emailaddress)
         {
             var useridParameter = userid.HasValue ?
@@ -378,6 +369,28 @@ namespace DORIS_AL.Models
         public virtual int ClearTestData()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ClearTestData");
+        }
+    
+        public virtual ObjectResult<MyUserDetails> getMyUserDetails(string hashValue, ObjectParameter validUser)
+        {
+            var hashValueParameter = hashValue != null ?
+                new ObjectParameter("HashValue", hashValue) :
+                new ObjectParameter("HashValue", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MyUserDetails>("getMyUserDetails", hashValueParameter, validUser);
+        }
+    
+        public virtual int cloneUser(string hash, Nullable<long> userID, ObjectParameter impersonate)
+        {
+            var hashParameter = hash != null ?
+                new ObjectParameter("hash", hash) :
+                new ObjectParameter("hash", typeof(string));
+    
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("cloneUser", hashParameter, userIDParameter, impersonate);
         }
     }
 }

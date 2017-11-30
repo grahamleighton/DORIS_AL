@@ -22,5 +22,6 @@ namespace DORIS_AL.Models
         public string SupplierName { get; set; }
         public Nullable<bool> Deactivated { get; set; }
         public string Telephone { get; set; }
+        public string MVCRole { get; set; }
     }
 }

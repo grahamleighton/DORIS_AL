@@ -35,5 +35,30 @@ namespace DORIS_AL.Controllers
             return Ok(lr);
         }
 
+        [ResponseType(typeof(string))]
+        public IHttpActionResult CloneUser ( CloneRequest req)
+        {
+            string token = "0";
+            if ( ! ModelState.IsValid )
+            {
+                return Ok(token);
+            }
+
+            ObjectParameter CloneToken = new ObjectParameter("impersonate", typeof(string));
+            CloneToken.Value = "0";
+            int rc = db.cloneUser(req.Hash, req.CloneUserID,CloneToken);
+            try
+            {
+                token = (string)CloneToken.Value;
+            }
+            catch(System.Exception e)
+            {
+                token = "0";
+            }
+
+            return (Ok(token));
+        }
+
+
     }
 }

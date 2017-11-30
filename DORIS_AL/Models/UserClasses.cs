@@ -80,6 +80,16 @@ namespace DORIS_AL.Models
         public string Subject { get; set; }
         public string EmailAddress { get; set; }
     }
+
+    public class CloneRequest
+    {
+        [Required]
+        [StringLength(36,MinimumLength =36)]
+        public string Hash { get; set; }
+        [Required]
+        [Range(1, long.MaxValue)]        
+        public long CloneUserID { get; set; }
+    }
     public class LoginRequest
     {
         [Required]
@@ -170,6 +180,7 @@ namespace DORIS_AL.Models
     }
     public class AddUser : UpdateUser
     {
+       
         [MaxLength(4)]
         public string SupplierCode { get; set; }
         public new string _display()

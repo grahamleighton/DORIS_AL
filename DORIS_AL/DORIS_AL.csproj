@@ -255,14 +255,18 @@
     <Content Include="Models\DA_Model.edmx.diagram">
       <DependentUpon>DA_Model.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\DORISDEV_DEVSERVER.pubxml" />
     <None Include="Properties\PublishProfiles\DORIS_AL.pubxml" />
+    <None Include="Properties\PublishProfiles\DORIS_AL_DEV.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
